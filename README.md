@@ -20,7 +20,15 @@ After installing both Vagrant and Virtualbox. Run the`vagrant init` command to i
 
 The masternode act as the controller while the slavenode is the target machine. On the `Vagrantfile` there's a `masternode` section, under which I have specified a path to a bashscript to automate the setup of LAMPSTACK and other configurations requried to serve the laravel application on the masternode server. 
 
+![masternode](images/masternode.png)
 
+Once done, visit http://192.168.56.22 to view the website on the browser
+
+![laravel-application](images/laravel.png)
+
+## B. Slavenode
+- Execute the bash script on the Slave node and verify that the PHP application is accessible through the VM's IP address 
+- Create a cron job to check the server's uptime every 12 am.
 
 
 
