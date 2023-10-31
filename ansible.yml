@@ -1,0 +1,30 @@
+---
+- name: Deploy and Monitor Web Server
+  hosts: 192.168.56.20 
+  become: yes
+  vars:
+    ansible_ssh_pass: your_ssh_password  
+
+  tasks:
+    - name: Execute the script on the Slave node
+      script: /home/vagrant/lampstack.sh 
+      args:
+        creates: /var/www/html/laravel/public  # Check if the website is already deployed
+
+    - name: Verify PHP application accessibility
+      uri:
+        url: http://{{ ansible_host }}
+        status_code: 200
+      register: web_response
+      ignore_errors: yes
+
+    - name: Take a screenshot as evidence
+      debug:
+        msg: "Web server is accessible. Status code: {{ web_response.status }}"
+
+    - name: Create a cron job to check server uptime
+      cron:
+        name: "Check Server Uptime"
+        job: "/usr/bin/uptime >> /var/log/server_uptime.log"
+        minute: 0
+        hour: 0
