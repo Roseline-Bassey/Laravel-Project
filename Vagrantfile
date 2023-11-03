@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
     masternode.vm.provider "virtualbox" do |vb|
       vb.gui = true
       vb.memory = "1000"
-    masternode.vm.provision "shell", path: "lampstack.sh"  
+    masternode.vm.provision "shell", path: "lampstack.sh" 
     end
   end
 

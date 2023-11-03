@@ -1,0 +1,30 @@
+---
+
+- hosts: slavenode
+  become: true
+  # vars:
+  #   ansible_connection: local
+  tasks:
+    - name: Create a cron job to check server uptime
+      cron:
+        name: "Check Server Uptime"
+        job: "/usr/bin/uptime >> /var/log/server_uptime.log"
+        minute: 0
+        hour: 0
+
+- name: Execute Bash Script
+  hosts: slavenode
+  become: true
+
+  tasks:
+    - name: Execute the script on the Slave node
+      script: /home/vagrant/lampstack.sh
+      args:
+        executable: /bin/bash
+      register: script_output
+      remote_src: yes
+
+    
+
+
+    
