@@ -16,10 +16,10 @@ Vagrant.configure("2") do |config|
   config.vm.define "slavenode" do |slavenode|
     slavenode.vm.box = "ubuntu/jammy64"
     slavenode.vm.hostname = "slavenode"
-    slavenode.vm.network "private_network", ip: "192.168.56.20"
+    slavenode.vm.network "private_network", ip: "192.168.56.25"
     slavenode.vm.provider "virtualbox" do |vb|
       vb.gui = true
-      vb.memory = "1000"
+      vb.memory = "1000" 
     end
   end
 end 

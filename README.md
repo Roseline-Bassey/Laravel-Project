@@ -30,6 +30,21 @@ Once done, visit http://192.168.56.22 to view the website on the browser
 - Execute the bash script on the Slave node and verify that the PHP application is accessible through the VM's IP address 
 - Create a cron job to check the server's uptime every 12 am.
 
+Firstly, you need to an ssh key pair on the host machine in this case, Windows using the WSL terminal. This will be used to authenticate into the target machine: slavenode. 
+
+`ssh-keygen` to generate key pairs. Then, copy the public key: `id_rsa.pub` to the `authorized-keys` file in the slavenode. 
+
+On WSL, run: `ssh vagrant@192.168.56.25` to validate that you can ssh into the target machine.
+
+You can run the playbook by running: `ansible-playbook playbook.yml` and you should be able to view the laravel app on the browswer like below:
+
+![laravel app for the slavenode](images/laravelslavenode.png)
+
+
+
+
+
+
 
 
 

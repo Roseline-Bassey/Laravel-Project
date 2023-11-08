@@ -1,6 +1,5 @@
 ---
-
-- hosts: slavenode
+- hosts: 192.168.56.25
   become: true
   # vars:
   #   ansible_connection: local
@@ -11,20 +10,16 @@
         job: "/usr/bin/uptime >> /var/log/server_uptime.log"
         minute: 0
         hour: 0
-
-- name: Execute Bash Script
-  hosts: slavenode
+  
+- name: Deploy LAMP Stack App
+  hosts: 192.168.56.25
   become: true
-
   tasks:
+    - name: Copy the script to the Slave node
+      copy:
+        src: C:\Users\Elitebook\Desktop\altschoolS2\Laravel-Project\lampstack.sh
+        dest: /tmp/lampstack.sh
+        mode: 0755
+
     - name: Execute the script on the Slave node
-      script: /home/vagrant/lampstack.sh
-      args:
-        executable: /bin/bash
-      register: script_output
-      remote_src: yes
-
-    
-
-
-    
+      command: /tmp/lampstack.sh
